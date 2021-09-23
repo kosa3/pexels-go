@@ -12,7 +12,7 @@ $ go get -u github.com/kosa3/pexels-go
 
 ## Examples
 
-See [example](./example) directory.
+See [example](_example) directory.
 
 ```go
 func main() {
