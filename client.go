@@ -75,7 +75,6 @@ func (cli *Client) get(ctx context.Context, path string, params url.Values, v in
 	if len(params) > 0 {
 		reqURL += "?" + params.Encode()
 	}
-	fmt.Println(reqURL)
 
 	req, err := http.NewRequest(http.MethodGet, reqURL, nil)
 	if err != nil {
