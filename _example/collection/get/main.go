@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	pixels "github.com/kosa3/pexels-go"
+	"github.com/kosa3/pexels-go"
 	"log"
 	"os"
 )
 
 func main() {
-	cli := pixels.NewClient(os.Args[1])
+	cli := pexels.NewClient(os.Args[1])
 	ctx := context.Background()
-	cs, err := cli.CollectionService.Get(ctx, &pixels.PageParams{
+	cs, err := cli.CollectionService.Get(ctx, &pexels.PageParams{
 		Page: 1,
 	})
 	if err != nil {

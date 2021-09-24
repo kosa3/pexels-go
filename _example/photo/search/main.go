@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	pixels "github.com/kosa3/pexels-go"
+	"github.com/kosa3/pexels-go"
 	"log"
 	"os"
 )
 
 func main() {
-	cli := pixels.NewClient(os.Args[1])
+	cli := pexels.NewClient(os.Args[1])
 	ctx := context.Background()
-	ps, err := cli.PhotoService.Search(ctx, &pixels.PhotoParams{
+	ps, err := cli.PhotoService.Search(ctx, &pexels.PhotoParams{
 		Query: "people",
 		Page:  2,
 	})
