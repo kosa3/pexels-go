@@ -16,9 +16,9 @@ See [example](_example) directory.
 
 ```go
 func main() {
-	cli := pixels.NewClient(os.Args[1])
+	cli := pexels.NewClient(os.Args[1])
 	ctx := context.Background()
-	ps, err := cli.PhotoService.Search(ctx, &pixels.PhotoParams{
+	ps, err := cli.PhotoService.Search(ctx, &pexels.PhotoParams{
 		Query: "people",
 		Page: 2,
 	})

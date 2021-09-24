@@ -1,13 +1,13 @@
-package pixels_test
+package pexels_test
 
 import (
 	"context"
-	pixels "github.com/kosa3/pexels-go"
+	"github.com/kosa3/pexels-go"
 	"testing"
 )
 
 func TestNewClientInvalidToken(t *testing.T) {
-	cli := pixels.NewClient("invalid")
+	cli := pexels.NewClient("invalid")
 	ctx := context.Background()
 	_, err := cli.PhotoService.Curated(ctx, nil)
 	if err == nil {
