@@ -3,7 +3,7 @@ name: Test and Vet
 on:
   push:
     branches:
-      - *
+      - '*'
 
 jobs:
   test:
