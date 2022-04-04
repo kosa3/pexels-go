@@ -17,5 +17,4 @@ func main() {
 	}
 
 	fmt.Println("Video Link:", vs.VideoFiles[0].Link)
-	fmt.Println("RateLimit:", cli.LastRateLimit.Limit)
 }
