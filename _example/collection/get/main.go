@@ -19,5 +19,4 @@ func main() {
 	}
 
 	fmt.Println("Collection:", cs.Collections)
-	fmt.Println("RateLimit:", cli.LastRateLimit.Limit)
 }

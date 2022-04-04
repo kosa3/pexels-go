@@ -3,16 +3,13 @@ package pexels
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
 	"reflect"
 	"regexp"
-	"strconv"
 	"strings"
-	"time"
 )
 
 const (
@@ -20,21 +17,14 @@ const (
 	videoBaseURL = "https://api.pexels.com"
 )
 
-type RateLimit struct {
-	Limit     int64
-	Remaining int64
-	Reset     time.Time
-}
-
 type Client struct {
 	PhotoService      PhotoService
 	VideoService      VideoService
 	CollectionService CollectionService
 
-	HTTPClient    *http.Client
-	AccessToken   string
-	BaseURL       string
-	LastRateLimit *RateLimit
+	HTTPClient  *http.Client
+	AccessToken string
+	BaseURL     string
 }
 
 func NewClient(accessToken string) *Client {
@@ -92,56 +82,11 @@ func (cli *Client) get(ctx context.Context, path string, params url.Values, v in
 		return cli.error(resp.StatusCode, resp.Body)
 	}
 
-	rl, err := RateLimitFromHeader(resp.Header)
-	if err != nil {
-		return err
-	}
-
-	cli.LastRateLimit = rl
-
 	if err := json.NewDecoder(resp.Body).Decode(v); err != nil {
 		return fmt.Errorf("cannot parse HTTP body: %w", err)
 	}
 
 	return nil
-}
-
-func RateLimitFromHeader(h http.Header) (*RateLimit, error) {
-	ls := h.Get("X-Ratelimit-Limit")
-	if ls == "" {
-		return nil, errors.New("cannot get X-Ratelimit-Limit from header")
-	}
-
-	l, err := strconv.ParseInt(ls, 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("X-Ratelimit-Limit is invalid value: %w", err)
-	}
-
-	rs := h.Get("X-Ratelimit-Remaining")
-	if rs == "" {
-		return nil, errors.New("cannot get X-Ratelimit-Remaining from header")
-	}
-
-	r, err := strconv.ParseInt(rs, 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("X-Rate-Limit-Remaining is invalid value: %w", err)
-	}
-
-	ts := h.Get("X-Ratelimit-Reset")
-	if ts == "" {
-		return nil, errors.New("cannot get X-Ratelimit-Reset from header")
-	}
-
-	t, err := strconv.ParseInt(ts, 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("X-Ratelimit-Reset is invalid value: %w", err)
-	}
-
-	return &RateLimit{
-		Limit:     l,
-		Remaining: r,
-		Reset:     time.Unix(t, 0),
-	}, nil
 }
 
 func (cli *Client) error(statusCode int, body io.Reader) error {

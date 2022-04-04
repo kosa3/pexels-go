@@ -17,5 +17,4 @@ func main() {
 	}
 
 	fmt.Println("Source Medium URL:", ps.Src.Medium)
-	fmt.Println("RateLimit:", cli.LastRateLimit.Limit)
 }
