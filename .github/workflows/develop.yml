@@ -1,9 +1,7 @@
 name: Test and Vet
 
 on:
-  push:
-    branches:
-      - master
+  push
 
 jobs:
   test:
