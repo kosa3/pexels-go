@@ -49,7 +49,7 @@ func (cli *Client) httpClient() *http.Client {
 
 func (cli *Client) do(ctx context.Context, req *http.Request) (*http.Response, error) {
 	req = req.WithContext(ctx)
-	req.Header.Set("Authorization", fmt.Sprintf("%s", cli.AccessToken))
+	req.Header.Set("Authorization", cli.AccessToken)
 	req.Header.Set("Content-Type", "application/json")
 	//req.Header.Set("User-Agent", "Pexels/Go")
 	return cli.httpClient().Do(req)
