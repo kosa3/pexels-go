@@ -68,7 +68,7 @@ func (cli *Client) get(ctx context.Context, path string, params url.Values, v in
 
 	req, err := http.NewRequest(http.MethodGet, reqURL, nil)
 	if err != nil {
-		return fmt.Errorf("cannot create HTTP request: %w", err)
+		return fmt.Errorf("cannot create HTTP request: %s", err)
 	}
 
 	resp, err := cli.do(ctx, req)
@@ -83,7 +83,7 @@ func (cli *Client) get(ctx context.Context, path string, params url.Values, v in
 	}
 
 	if err := json.NewDecoder(resp.Body).Decode(v); err != nil {
-		return fmt.Errorf("cannot parse HTTP body: %w", err)
+		return fmt.Errorf("cannot parse HTTP body: %s", err)
 	}
 
 	return nil
