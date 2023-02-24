@@ -46,6 +46,7 @@ type Photo struct {
 	AvgColor        string `json:"avg_color"`
 	Liked           bool   `json:"liked"`
 	Src             Source `json:"src"`
+	Alt             string `json:"alt"`
 }
 
 type Source struct {
