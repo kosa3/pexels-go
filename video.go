@@ -53,12 +53,13 @@ type User struct {
 
 type VideoFile struct {
 	ID       int     `json:"id"`
-	Quality  string  `json:"quality"`
+	Quality  *string `json:"quality"`
 	FileType string  `json:"file_type"`
 	Width    int     `json:"width"`
 	Height   int     `json:"height"`
 	FPS      float32 `json:"fps"`
 	Link     string  `json:"link"`
+	Size     int     `json:"size"`
 }
 
 type VideoPicture struct {
